@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WHO'S ROXY? — Mockup 1: The World</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+  :root {
+    --black: #000000;
+    --magenta: #CC00CC;
+    --hot-pink: #FF33FF;
+    --glow-pink: #FF00FF;
+    --white: #FFFFFF;
+    --dark-gray: #0a0a0a;
+    --muted-pink: #3d003d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 20px; height: 20px;
+    border: 2px solid var(--glow-pink);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease;
+    box-shadow: 0 0 10px var(--glow-pink), 0 0 20px var(--magenta);
+  }
+  .cursor-dot {
+    position: fixed;
+    width: 4px; height: 4px;
+    background: var(--glow-pink);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+  }
+
+  /* NOISE GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* LABEL TAG */
+  .label-tag {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: 1px solid var(--magenta);
+    color: var(--magenta);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    padding: 4px 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    z-index: 100;
+    opacity: 0.7;
+  }
+
+  /* ═══════════════════════════════════ SCENE WORLD */
+  .scene {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ANIMATED BACKGROUND CITYSCAPE */
+  .city-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .city-layer {
+    position: absolute;
+    bottom: 0;
+    width: 200%;
+    height: 50%;
+  }
+
+  /* Buildings silhouette using CSS */
+  .buildings-far {
+    background:
+      linear-gradient(var(--black) 0%, var(--black) 100%);
+    background-color: var(--muted-pink);
+    clip-path: polygon(
+      0% 100%, 0% 80%, 2% 80%, 2% 60%, 4% 60%, 4% 80%, 5% 80%, 5% 65%,
+      7% 65%, 7% 45%, 8% 45%, 8% 55%, 10% 55%, 10% 35%, 11% 35%, 11% 55%,
+      13% 55%, 13% 70%, 15% 70%, 15% 50%, 17% 50%, 17% 30%, 19% 30%, 19% 50%,
+      20% 50%, 20% 65%, 22% 65%, 22% 40%, 24% 40%, 24% 60%, 26% 60%, 26% 45%,
+      28% 45%, 28% 25%, 30% 25%, 30% 45%, 32% 45%, 32% 65%, 34% 65%, 34% 45%,
+      36% 45%, 36% 60%, 38% 60%, 38% 40%, 40% 40%, 40% 20%, 42% 20%, 42% 40%,
+      44% 40%, 44% 55%, 46% 55%, 46% 35%, 48% 35%, 48% 55%, 50% 55%, 50% 70%,
+      52% 70%, 52% 50%, 54% 50%, 54% 30%, 56% 30%, 56% 50%, 58% 50%, 58% 65%,
+      60% 65%, 60% 45%, 62% 45%, 62% 25%, 64% 25%, 64% 45%, 66% 45%, 66% 60%,
+      68% 60%, 68% 40%, 70% 40%, 70% 60%, 72% 60%, 72% 75%, 74% 75%, 74% 55%,
+      76% 55%, 76% 35%, 78% 35%, 78% 55%, 80% 55%, 80% 70%, 82% 70%, 82% 50%,
+      84% 50%, 84% 30%, 86% 30%, 86% 50%, 88% 50%, 88% 65%, 90% 65%, 90% 45%,
+      92% 45%, 92% 60%, 94% 60%, 94% 80%, 96% 80%, 96% 60%, 98% 60%, 98% 75%,
+      100% 75%, 100% 100%
+    );
+    opacity: 0.5;
+    animation: drift 40s linear infinite;
+  }
+
+  @keyframes drift {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* GROUND */
+  .ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(to top, #1a001a, transparent);
+  }
+
+  /* GRID FLOOR */
+  .grid-floor {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background-image:
+      linear-gradient(rgba(204, 0, 204, 0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(204, 0, 204, 0.15) 1px, transparent 1px);
+    background-size: 60px 60px;
+    transform: perspective(400px) rotateX(60deg);
+    transform-origin: bottom center;
+  }
+
+  /* SPRAY PAINT SPLATTER EFFECTS */
+  .splatter {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+  .splatter-1 {
+    width: 400px; height: 300px;
+    background: radial-gradient(ellipse, rgba(255,0,255,0.3) 0%, transparent 70%);
+    top: 10%; left: 5%;
+    animation: breathe 4s ease-in-out infinite;
+  }
+  .splatter-2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(ellipse, rgba(200,0,200,0.2) 0%, transparent 70%);
+    top: 40%; right: 10%;
+    animation: breathe 6s ease-in-out infinite reverse;
+  }
+  .splatter-3 {
+    width: 200px; height: 200px;
+    background: radial-gradient(ellipse, rgba(255,100,255,0.15) 0%, transparent 70%);
+    bottom: 20%; left: 30%;
+    animation: breathe 5s ease-in-out infinite 2s;
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+
+  /* MAIN LOGO AREA */
+  .main-logo {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    animation: floatIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes floatIn {
+    from { opacity: 0; transform: translateY(40px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 15vw, 180px);
+    line-height: 0.85;
+    letter-spacing: -2px;
+    color: var(--white);
+    text-shadow:
+      0 0 20px var(--glow-pink),
+      0 0 40px var(--magenta),
+      0 0 80px rgba(204,0,204,0.5),
+      4px 4px 0 var(--magenta);
+    position: relative;
+  }
+
+  .logo-text span {
+    color: var(--glow-pink);
+    text-shadow:
+      0 0 10px #fff,
+      0 0 30px var(--glow-pink),
+      0 0 60px var(--magenta);
+  }
+
+  .logo-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: var(--magenta);
+    margin-top: 12px;
+    opacity: 0.8;
+  }
+
+  /* FLOATING CHARACTER ZONES */
+  .character-zone {
+    position: absolute;
+    bottom: 120px;
+    display: flex;
+    gap: 40px;
+    align-items: flex-end;
+    z-index: 8;
+  }
+
+  .char-placeholder {
+    width: 120px;
+    height: 180px;
+    position: relative;
+    cursor: none;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .char-placeholder:hover {
+    transform: translateY(-15px);
+  }
+
+  /* Abstract character shapes using CSS */
+  .char-body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .char-1 .char-body::before {
+    content: '⬟';
+    font-size: 80px;
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    color: var(--magenta);
+    filter: drop-shadow(0 0 15px var(--glow-pink));
+    animation: spin 10s linear infinite;
+  }
+  .char-1 .char-body::after {
+    content: attr(data-name);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--magenta);
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* NAV PORTALS */
+  .nav-portals {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+    z-index: 50;
+    background: rgba(0,0,0,0.8);
+    border: 1px solid rgba(204,0,204,0.3);
+    padding: 8px 12px;
+    backdrop-filter: blur(10px);
+  }
+
+  .portal-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
+    cursor: none;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .portal-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background: var(--glow-pink);
+    transition: width 0.3s ease;
+  }
+
+  .portal-btn:hover {
+    color: var(--glow-pink);
+    text-shadow: 0 0 10px var(--glow-pink);
+  }
+  .portal-btn:hover::after { width: 80%; }
+  .portal-btn.active { color: var(--white); }
+
+  /* SOCIAL DOCK */
+  .social-dock {
+    position: fixed;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 50;
+  }
+
+  .social-link {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .social-link::before {
+    content: '—';
+    display: block;
+    color: var(--magenta);
+    margin-bottom: 6px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: bottom;
+  }
+
+  .social-link:hover {
+    color: var(--glow-pink);
+    text-shadow: 0 0 8px var(--glow-pink);
+  }
+  .social-link:hover::before { transform: scaleX(1); }
+
+  /* CONTENT PANELS */
+  .panel {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    padding: 80px 40px 100px;
+    overflow-y: auto;
+    animation: panelIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .panel.active { display: flex; flex-direction: column; }
+
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* GIGS PANEL */
+  .panel-gigs {
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(20px);
+  }
+
+  .panel-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 60px;
+    color: var(--white);
+    text-shadow: 3px 3px 0 var(--magenta);
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+  }
+
+  .gig-list { display: flex; flex-direction: column; gap: 1px; }
+
+  .gig-item {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(204,0,204,0.2);
+    transition: all 0.3s ease;
+    gap: 20px;
+  }
+  .gig-item:hover {
+    padding-left: 10px;
+    border-color: var(--magenta);
+  }
+  .gig-item:hover .gig-date { color: var(--glow-pink); }
+
+  .gig-date {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--magenta);
+    line-height: 1;
+    transition: color 0.3s ease;
+  }
+
+  .gig-date span {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .gig-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .gig-info p {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+  }
+
+  .gig-ticket {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--magenta);
+    border: none;
+    padding: 8px 16px;
+    cursor: none;
+    transition: all 0.2s ease;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .gig-ticket:hover {
+    background: var(--glow-pink);
+    box-shadow: 0 0 20px var(--glow-pink);
+  }
+
+  /* PHOTOS PANEL */
+  .panel-photos { background: rgba(0,0,0,0.92); backdrop-filter: blur(20px); }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    margin-top: 10px;
+  }
+
+  .photo-cell {
+    aspect-ratio: 1;
+    background: var(--muted-pink);
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+    transition: transform 0.3s ease;
+  }
+
+  .photo-cell:hover { transform: scale(0.98); }
+  .photo-cell:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a001a 0%, #3d003d 50%, #1a001a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(204,0,204,0.4);
+    text-transform: uppercase;
+    border: 1px solid rgba(204,0,204,0.15);
+    min-height: 100px;
+  }
+
+  .photo-cell::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(204,0,204,0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .photo-cell:hover::after { opacity: 1; }
+
+  /* ABOUT PANEL */
+  .panel-about { background: rgba(0,0,0,0.92); backdrop-filter: blur(20px); }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 20px;
+  }
+
+  .about-text p {
+    font-size: 13px;
+    line-height: 2;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+  }
+
+  .about-text p strong {
+    color: var(--glow-pink);
+    font-weight: 700;
+  }
+
+  .stat-block {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .stat {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    border-left: 2px solid var(--magenta);
+    padding-left: 16px;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--white);
+    line-height: 1;
+    text-shadow: 2px 2px 0 var(--magenta);
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .about-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .rotating-logo {
+    width: 280px;
+    height: 280px;
+    border: 1px solid rgba(204,0,204,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: rotateSlow 20s linear infinite;
+  }
+
+  @keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .rotating-logo::before {
+    content: 'WHO\'S ROXY? · WHO\'S ROXY? · WHO\'S ROXY? · ';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: rgba(204,0,204,0.5);
+    font-family: 'Space Mono', monospace;
+    /* text on circle via clip */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-center {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: var(--glow-pink);
+    text-shadow: 0 0 20px var(--glow-pink);
+    animation: rotateSlow 20s linear infinite reverse;
+    text-align: center;
+    line-height: 1;
+  }
+
+  /* SCAN LINE EFFECT */
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 998;
+  }
+
+  /* VIGNETTE */
+  .vignette {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.8) 100%);
+    pointer-events: none;
+    z-index: 997;
+  }
+
+  /* MOCKUP LABEL */
+  .mockup-label {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(204,0,204,0.15);
+    border: 1px solid var(--magenta);
+    color: var(--magenta);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    padding: 6px 16px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    z-index: 200;
+  }
+
+  /* SPRAY DRIPS DECORATION */
+  .drip {
+    position: fixed;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--magenta), transparent);
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .drip-1 { top: 0; left: 15%; height: 80px; }
+  .drip-2 { top: 0; left: 72%; height: 120px; }
+  .drip-3 { top: 0; right: 25%; height: 60px; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="scanlines"></div>
+<div class="vignette"></div>
+
+<!-- DRIP DECORATIONS -->
+<div class="drip drip-1"></div>
+<div class="drip drip-2"></div>
+<div class="drip drip-3"></div>
+
+<div class="mockup-label">Concept 01 — The World</div>
+<div class="label-tag">Beta v0.1</div>
+
+<!-- SOCIAL DOCK -->
+<div class="social-dock">
+  <a href="#" class="social-link">Instagram</a>
+  <a href="#" class="social-link">TikTok</a>
+  <a href="#" class="social-link">Spotify</a>
+  <a href="#" class="social-link">YouTube</a>
+</div>
+
+<!-- MAIN SCENE -->
+<div class="scene" id="mainScene">
+  <!-- Animated background city -->
+  <div class="city-bg">
+    <div class="city-layer buildings-far"></div>
+    <div class="grid-floor"></div>
+    <div class="ground"></div>
+  </div>
+
+  <!-- Glow splatters -->
+  <div class="splatter splatter-1"></div>
+  <div class="splatter splatter-2"></div>
+  <div class="splatter splatter-3"></div>
+
+  <!-- Main hero logo -->
+  <div class="main-logo">
+    <div class="logo-text">WHO'S<br><span>ROXY?</span></div>
+    <div class="logo-sub">Est. 2024 · The Band · Enter The World</div>
+  </div>
+</div>
+
+<!-- GIGS PANEL -->
+<div class="panel panel-gigs" id="panel-gigs">
+  <div class="panel-title">Upcoming Gigs</div>
+  <div class="gig-list">
+    <div class="gig-item">
+      <div class="gig-date">12<span>MAY 2025</span></div>
+      <div class="gig-info">
+        <h3>The Lexington</h3>
+        <p>London, UK · Doors 7PM</p>
+      </div>
+      <button class="gig-ticket">Tickets</button>
+    </div>
+    <div class="gig-item">
+      <div class="gig-date">18<span>MAY 2025</span></div>
+      <div class="gig-info">
+        <h3>Night & Day Café</h3>
+        <p>Manchester, UK · Doors 8PM</p>
+      </div>
+      <button class="gig-ticket">Tickets</button>
+    </div>
+    <div class="gig-item">
+      <div class="gig-date">03<span>JUN 2025</span></div>
+      <div class="gig-info">
+        <h3>Stereo</h3>
+        <p>Glasgow, UK · Doors 7:30PM</p>
+      </div>
+      <button class="gig-ticket">Tickets</button>
+    </div>
+    <div class="gig-item">
+      <div class="gig-date">14<span>JUN 2025</span></div>
+      <div class="gig-info">
+        <h3>The Deaf Institute</h3>
+        <p>Manchester, UK · All Ages</p>
+      </div>
+      <button class="gig-ticket">Tickets</button>
+    </div>
+    <div class="gig-item">
+      <div class="gig-date">28<span>JUN 2025</span></div>
+      <div class="gig-info">
+        <h3>Glastonbury Festival</h3>
+        <p>Pilton, Somerset · Emerging Stage</p>
+      </div>
+      <button class="gig-ticket">Info</button>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTOS PANEL -->
+<div class="panel panel-photos" id="panel-photos">
+  <div class="panel-title">The Band</div>
+  <div class="photo-grid">
+    <div class="photo-cell"><div class="photo-placeholder">Live @ The Lexington</div></div>
+    <div class="photo-cell"><div class="photo-placeholder">Studio Session</div></div>
+    <div class="photo-cell"><div class="photo-placeholder">Rehearsal</div></div>
+    <div class="photo-cell"><div class="photo-placeholder">Press Shot 01</div></div>
+    <div class="photo-cell"><div class="photo-placeholder">Backstage</div></div>
+    <div class="photo-cell"><div class="photo-placeholder">Live @ Stereo</div></div>
+    <div class="photo-cell"><div class="photo-placeholder">Press Shot 02</div></div>
+  </div>
+</div>
+
+<!-- ABOUT PANEL -->
+<div class="panel panel-about" id="panel-about">
+  <div class="panel-title">Who Is Roxy?</div>
+  <div class="about-layout">
+    <div class="about-text">
+      <p><strong>Who's Roxy?</strong> is a question we get asked a lot. The truth is, we're still figuring it out — and that's exactly the point. Born out of late-night rehearsals and too much coffee, we are a band built on raw energy, honest noise, and the kind of music that feels like it shouldn't exist yet.</p>
+      <p>Based in <strong>London</strong>, we've been tearing up stages across the UK since 2024. Our sound sits somewhere between post-punk urgency and experimental electronics — always shifting, never settling.</p>
+      <p>We're just getting started. <strong>Get loud with us.</strong></p>
+      <div class="stat-block">
+        <div class="stat">
+          <div class="stat-num">24</div>
+          <div class="stat-label">Shows played</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Singles released</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">1</div>
+          <div class="stat-label">EP incoming</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="rotating-logo">
+        <div class="logo-center">WHO'S<br>ROXY?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="nav-portals">
+  <button class="portal-btn active" onclick="showPanel('main')">Home</button>
+  <button class="portal-btn" onclick="showPanel('gigs')">Gigs</button>
+  <button class="portal-btn" onclick="showPanel('photos')">Photos</button>
+  <button class="portal-btn" onclick="showPanel('about')">Who?</button>
+</nav>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const dot = document.getElementById('cursorDot');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    dot.style.left = e.clientX + 'px';
+    dot.style.top = e.clientY + 'px';
+  });
+
+  // Panel nav
+  function showPanel(name) {
+    document.getElementById('mainScene').style.display = name === 'main' ? 'flex' : 'none';
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.portal-btn').forEach(b => b.classList.remove('active'));
+
+    if (name !== 'main') {
+      const panel = document.getElementById('panel-' + name);
+      if (panel) panel.classList.add('active');
+    }
+
+    const btns = document.querySelectorAll('.portal-btn');
+    const map = {main:0, gigs:1, photos:2, about:3};
+    btns[map[name]]?.classList.add('active');
+  }
+
+  // Hover scale on interactive elements
+  document.querySelectorAll('.portal-btn, .social-link, .gig-ticket').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1.8)';
+      cursor.style.borderColor = '#fff';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      cursor.style.borderColor = '#FF00FF';
+    });
+  });
+</script>
+</body>
+</html>
