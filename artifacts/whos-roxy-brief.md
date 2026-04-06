@@ -2,7 +2,7 @@
 
 ## What We're Building
 
-Official website for **Who's Roxy?**, a new London-based post-punk/electronic band. Priority is simplicity — social media links, band photos, and upcoming gigs. Think landing page more than deep site.
+Official website for **Who's Roxy?**, a new Dublin-based post-punk/electronic band. Priority is simplicity — social media links, band photos, and upcoming gigs. Think landing page more than deep site.
 
 ---
 
