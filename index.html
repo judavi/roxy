@@ -336,6 +336,93 @@
     letter-spacing: 2px;
   }
 
+  /* GIG LIST */
+  .gig-list { display: flex; flex-direction: column; gap: 1px; }
+
+  .gig-item {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(204,0,204,0.2);
+    transition: all 0.3s ease;
+    gap: 20px;
+  }
+  .gig-item:hover {
+    padding-left: 10px;
+    border-color: var(--magenta);
+  }
+  .gig-item:hover .gig-date { color: var(--glow-pink); }
+
+  .gig-date {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--magenta);
+    line-height: 1;
+    transition: color 0.3s ease;
+  }
+  .gig-date span {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.4);
+  }
+  .gig-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .gig-info p {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+  }
+  .gig-ticket {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--magenta);
+    border: none;
+    padding: 8px 16px;
+    cursor: none;
+    transition: all 0.2s ease;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    text-decoration: none;
+    display: inline-block;
+  }
+  .gig-ticket:hover {
+    background: var(--glow-pink);
+    box-shadow: 0 0 20px var(--glow-pink);
+  }
+
+  .gigs-footer {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .gigs-footer-text {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+  .gigs-footer-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--magenta);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .gigs-footer-link:hover { color: var(--glow-pink); }
+
   /* NO GIGS STATE */
   .no-gigs {
     flex: 1;
@@ -704,13 +791,19 @@
 <!-- GIGS PANEL -->
 <div class="panel panel-gigs" id="panel-gigs">
   <div class="panel-title">Live</div>
-  <div class="no-gigs">
-    <div class="no-gigs-title">No Shows<br>Announced Yet</div>
-    <div class="no-gigs-sub">We're cooking something up.<br>Follow us to be the first to know.</div>
-    <a href="https://www.instagram.com/whosroxyband" target="_blank" rel="noopener" class="no-gigs-cta">
-      <span class="no-gigs-pulse"></span>
-      Follow @whosroxyband
-    </a>
+  <div class="gig-list">
+    <div class="gig-item">
+      <div class="gig-date">10<span>MAY 2025</span></div>
+      <div class="gig-info">
+        <h3>The Soundhouse</h3>
+        <p>Dublin, Ireland · Doors 1PM</p>
+      </div>
+      <a href="https://www.instagram.com/whosroxyband" target="_blank" rel="noopener" class="gig-ticket">Info</a>
+    </div>
+  </div>
+  <div class="gigs-footer">
+    <span class="gigs-footer-text">More shows coming —</span>
+    <a href="https://www.instagram.com/whosroxyband" target="_blank" rel="noopener" class="gigs-footer-link">Follow @whosroxyband</a>
   </div>
 </div>
 
