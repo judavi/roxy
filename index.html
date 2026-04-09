@@ -875,7 +875,19 @@
   }
 
   // Panel nav
-  function showPanel(name) {
+  const panelToButtonIndex = { main: 0, gigs: 1, photos: 2, about: 3 };
+  const panelToHash = { main: '', gigs: 'live', photos: 'photos', about: 'about' };
+  const hashToPanel = Object.fromEntries(
+    Object.entries(panelToHash)
+      .filter(([, hash]) => hash)
+      .map(([panel, hash]) => [hash, panel])
+  );
+  hashToPanel.home = 'main';
+  hashToPanel.main = 'main';
+  hashToPanel.gigs = 'gigs';
+  hashToPanel.who = 'about';
+
+  function showPanel(name, updateHash = true) {
     document.getElementById('mainScene').style.display = name === 'main' ? 'flex' : 'none';
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.portal-btn').forEach(b => b.classList.remove('active'));
@@ -886,9 +898,35 @@
     }
 
     const btns = document.querySelectorAll('.portal-btn');
-    const map = { main: 0, gigs: 1, photos: 2, about: 3 };
-    btns[map[name]]?.classList.add('active');
+    const activeIndex = panelToButtonIndex[name];
+    if (activeIndex !== undefined) btns[activeIndex]?.classList.add('active');
+
+    if (updateHash) {
+      const hash = panelToHash[name] ?? '';
+      const nextUrl = hash
+        ? `${window.location.pathname}${window.location.search}#${hash}`
+        : `${window.location.pathname}${window.location.search}`;
+      window.history.replaceState(null, '', nextUrl);
+    }
   }
+
+  function panelFromHash() {
+    const hash = window.location.hash.replace('#', '').toLowerCase();
+    return hashToPanel[hash] || 'main';
+  }
+
+  function applyPanelFromHash() {
+    showPanel(panelFromHash(), false);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      applyPanelFromHash();
+    }, { once: true });
+  } else {
+    applyPanelFromHash();
+  }
+  window.addEventListener('hashchange', applyPanelFromHash);
 
   // Cursor scale on interactive elements
   document.querySelectorAll('.portal-btn, .social-link, .no-gigs-cta').forEach(el => {
