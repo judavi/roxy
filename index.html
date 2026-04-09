@@ -875,6 +875,9 @@
   }
 
   // Panel nav
+  const PANEL_TO_HASH = { main: '', gigs: 'live', photos: 'photos', about: 'about' };
+  const HASH_TO_PANEL = { home: 'main', main: 'main', live: 'gigs', gigs: 'gigs', photos: 'photos', about: 'about', who: 'about' };
+
   function showPanel(name, updateHash = true) {
     document.getElementById('mainScene').style.display = name === 'main' ? 'flex' : 'none';
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -891,8 +894,7 @@
     if (activeIndex !== undefined) btns[activeIndex]?.classList.add('active');
 
     if (updateHash) {
-      const hashMap = { main: '', gigs: 'live', photos: 'photos', about: 'about' };
-      const hash = hashMap[name] ?? '';
+      const hash = PANEL_TO_HASH[name] ?? '';
       const nextUrl = hash
         ? `${window.location.pathname}${window.location.search}#${hash}`
         : `${window.location.pathname}${window.location.search}`;
@@ -902,8 +904,7 @@
 
   function panelFromHash() {
     const hash = window.location.hash.replace('#', '').toLowerCase();
-    const hashMap = { home: 'main', main: 'main', live: 'gigs', gigs: 'gigs', photos: 'photos', about: 'about', who: 'about' };
-    return hashMap[hash] || 'main';
+    return HASH_TO_PANEL[hash] || 'main';
   }
 
   window.addEventListener('hashchange', () => showPanel(panelFromHash(), false));
