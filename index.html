@@ -907,20 +907,18 @@
     return HASH_TO_PANEL[hash] || 'main';
   }
 
-  let hasInitializedFromHash = false;
   function applyPanelFromHash() {
     showPanel(panelFromHash(), false);
-    hasInitializedFromHash = true;
   }
-
-  window.addEventListener('hashchange', applyPanelFromHash);
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      if (!hasInitializedFromHash) applyPanelFromHash();
+      applyPanelFromHash();
+      window.addEventListener('hashchange', applyPanelFromHash);
     }, { once: true });
   } else {
     applyPanelFromHash();
+    window.addEventListener('hashchange', applyPanelFromHash);
   }
 
   // Cursor scale on interactive elements
