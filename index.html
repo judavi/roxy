@@ -875,7 +875,7 @@
   }
 
   // Panel nav
-  function showPanel(name) {
+  function showPanel(name, updateHash = true) {
     document.getElementById('mainScene').style.display = name === 'main' ? 'flex' : 'none';
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.portal-btn').forEach(b => b.classList.remove('active'));
@@ -887,8 +887,27 @@
 
     const btns = document.querySelectorAll('.portal-btn');
     const map = { main: 0, gigs: 1, photos: 2, about: 3 };
-    btns[map[name]]?.classList.add('active');
+    const activeIndex = map[name];
+    if (activeIndex !== undefined) btns[activeIndex]?.classList.add('active');
+
+    if (updateHash) {
+      const hashMap = { main: '', gigs: 'live', photos: 'photos', about: 'about' };
+      const hash = hashMap[name] ?? '';
+      const nextUrl = hash
+        ? `${window.location.pathname}${window.location.search}#${hash}`
+        : `${window.location.pathname}${window.location.search}`;
+      window.history.replaceState(null, '', nextUrl);
+    }
   }
+
+  function panelFromHash() {
+    const hash = window.location.hash.replace('#', '').toLowerCase();
+    const hashMap = { home: 'main', main: 'main', live: 'gigs', gigs: 'gigs', photos: 'photos', about: 'about', who: 'about' };
+    return hashMap[hash] || 'main';
+  }
+
+  window.addEventListener('hashchange', () => showPanel(panelFromHash(), false));
+  showPanel(panelFromHash(), false);
 
   // Cursor scale on interactive elements
   document.querySelectorAll('.portal-btn, .social-link, .no-gigs-cta').forEach(el => {
