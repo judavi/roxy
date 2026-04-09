@@ -908,7 +908,9 @@
   }
 
   window.addEventListener('hashchange', () => showPanel(panelFromHash(), false));
-  showPanel(panelFromHash(), false);
+  document.addEventListener('DOMContentLoaded', () => {
+    showPanel(panelFromHash(), false);
+  });
 
   // Cursor scale on interactive elements
   document.querySelectorAll('.portal-btn, .social-link, .no-gigs-cta').forEach(el => {
