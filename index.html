@@ -875,8 +875,17 @@
   }
 
   // Panel nav
+  const panelToButtonIndex = { main: 0, gigs: 1, photos: 2, about: 3 };
   const panelToHash = { main: '', gigs: 'live', photos: 'photos', about: 'about' };
-  const hashToPanel = { home: 'main', main: 'main', live: 'gigs', gigs: 'gigs', photos: 'photos', about: 'about', who: 'about' };
+  const hashToPanel = Object.fromEntries(
+    Object.entries(panelToHash)
+      .filter(([, hash]) => hash)
+      .map(([panel, hash]) => [hash, panel])
+  );
+  hashToPanel.home = 'main';
+  hashToPanel.main = 'main';
+  hashToPanel.gigs = 'gigs';
+  hashToPanel.who = 'about';
 
   function showPanel(name, updateHash = true) {
     document.getElementById('mainScene').style.display = name === 'main' ? 'flex' : 'none';
@@ -889,8 +898,7 @@
     }
 
     const btns = document.querySelectorAll('.portal-btn');
-    const map = { main: 0, gigs: 1, photos: 2, about: 3 };
-    const activeIndex = map[name];
+    const activeIndex = panelToButtonIndex[name];
     if (activeIndex !== undefined) btns[activeIndex]?.classList.add('active');
 
     if (updateHash) {
