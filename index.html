@@ -907,10 +907,21 @@
     return HASH_TO_PANEL[hash] || 'main';
   }
 
-  window.addEventListener('hashchange', () => showPanel(panelFromHash(), false));
-  document.addEventListener('DOMContentLoaded', () => {
+  let hasInitializedFromHash = false;
+  function applyPanelFromHash() {
     showPanel(panelFromHash(), false);
-  });
+    hasInitializedFromHash = true;
+  }
+
+  window.addEventListener('hashchange', applyPanelFromHash);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!hasInitializedFromHash) applyPanelFromHash();
+    }, { once: true });
+  } else {
+    applyPanelFromHash();
+  }
 
   // Cursor scale on interactive elements
   document.querySelectorAll('.portal-btn, .social-link, .no-gigs-cta').forEach(el => {
