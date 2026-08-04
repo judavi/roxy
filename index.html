@@ -516,6 +516,18 @@
     transition: transform 0.3s ease;
   }
 
+  .photo-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .photo-cell:hover img {
+    transform: scale(1.05);
+  }
+
   .photo-cell:hover { transform: scale(0.98); }
   .photo-cell:nth-child(1) { grid-column: span 2; grid-row: span 2; }
 
@@ -867,13 +879,18 @@
 <div class="panel panel-photos" id="panel-photos">
   <div class="panel-title">The Band</div>
   <div class="photo-grid">
-    <div class="photo-cell"><div class="photo-placeholder">Press Shot</div></div>
-    <div class="photo-cell"><div class="photo-placeholder">Studio</div></div>
-    <div class="photo-cell"><div class="photo-placeholder">Live</div></div>
-    <div class="photo-cell"><div class="photo-placeholder">Behind The Scenes</div></div>
-    <div class="photo-cell"><div class="photo-placeholder">Rehearsal</div></div>
-    <div class="photo-cell"><div class="photo-placeholder">On The Road</div></div>
-    <div class="photo-cell"><div class="photo-placeholder">Press Shot 02</div></div>
+    <div class="photo-cell"><img src="assets/photos/photo_01.webp" alt="Who's Roxy photo 1" loading="lazy"></div>
+    <div class="photo-cell"><img src="assets/photos/photo_02.webp" alt="Who's Roxy photo 2" loading="lazy"></div>
+    <div class="photo-cell"><img src="assets/photos/photo_03.webp" alt="Who's Roxy photo 3" loading="lazy"></div>
+    <div class="photo-cell"><img src="assets/photos/photo_04.webp" alt="Who's Roxy photo 4" loading="lazy"></div>
+    <div class="photo-cell"><img src="assets/photos/photo_05.webp" alt="Who's Roxy photo 5" loading="lazy"></div>
+    <div class="photo-cell"><img src="assets/photos/photo_06.webp" alt="Who's Roxy photo 6" loading="lazy"></div>
+    <div class="photo-cell"><img src="assets/photos/photo_07.webp" alt="Who's Roxy photo 7" loading="lazy"></div>
+    <div class="photo-cell"><img src="assets/photos/photo_08.webp" alt="Who's Roxy photo 8" loading="lazy"></div>
+    <div class="photo-cell"><img src="assets/photos/photo_09.webp" alt="Who's Roxy photo 9" loading="lazy"></div>
+    <div class="photo-cell"><img src="assets/photos/photo_10.webp" alt="Who's Roxy photo 10" loading="lazy"></div>
+    <div class="photo-cell"><img src="assets/photos/photo_11.webp" alt="Who's Roxy photo 11" loading="lazy"></div>
+    <div class="photo-cell"><img src="assets/photos/photo_12.webp" alt="Who's Roxy photo 12" loading="lazy"></div>
   </div>
 </div>
 
