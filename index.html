@@ -16,9 +16,9 @@
 
   :root {
     --black: #000000;
-    --magenta: #CC00CC;
-    --hot-pink: #FF33FF;
-    --glow-pink: #FF00FF;
+    --magenta: #af15e8;
+    --hot-pink: #af15e8;
+    --glow-pink: #af15e8;
     --white: #FFFFFF;
     --dark-gray: #0a0a0a;
     --muted-pink: #3d003d;
@@ -135,8 +135,8 @@
     width: 100%;
     height: 200px;
     background-image:
-      linear-gradient(rgba(204, 0, 204, 0.15) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(204, 0, 204, 0.15) 1px, transparent 1px);
+      linear-gradient(rgba(175,21,232, 0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(175,21,232, 0.15) 1px, transparent 1px);
     background-size: 60px 60px;
     transform: perspective(400px) rotateX(60deg);
     transform-origin: bottom center;
@@ -152,19 +152,19 @@
   }
   .splatter-1 {
     width: 400px; height: 300px;
-    background: radial-gradient(ellipse, rgba(255,0,255,0.3) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(175,21,232,0.3) 0%, transparent 70%);
     top: 10%; left: 5%;
     animation: breathe 4s ease-in-out infinite;
   }
   .splatter-2 {
     width: 300px; height: 300px;
-    background: radial-gradient(ellipse, rgba(200,0,200,0.2) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(175,21,232,0.2) 0%, transparent 70%);
     top: 40%; right: 10%;
     animation: breathe 6s ease-in-out infinite reverse;
   }
   .splatter-3 {
     width: 200px; height: 200px;
-    background: radial-gradient(ellipse, rgba(255,100,255,0.15) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(175,21,232,0.15) 0%, transparent 70%);
     bottom: 20%; left: 30%;
     animation: breathe 5s ease-in-out infinite 2s;
   }
@@ -195,12 +195,12 @@
     filter:
       drop-shadow(0 0 20px var(--glow-pink))
       drop-shadow(0 0 40px var(--magenta))
-      drop-shadow(0 0 80px rgba(204,0,204,0.5));
+      drop-shadow(0 0 80px rgba(175,21,232,0.5));
     animation: logoPulse 4s ease-in-out infinite;
   }
 
   @keyframes logoPulse {
-    0%, 100% { filter: drop-shadow(0 0 20px var(--glow-pink)) drop-shadow(0 0 40px var(--magenta)) drop-shadow(0 0 80px rgba(204,0,204,0.5)); }
+    0%, 100% { filter: drop-shadow(0 0 20px var(--glow-pink)) drop-shadow(0 0 40px var(--magenta)) drop-shadow(0 0 80px rgba(175,21,232,0.5)); }
     50% { filter: drop-shadow(0 0 30px #fff) drop-shadow(0 0 60px var(--glow-pink)) drop-shadow(0 0 100px var(--magenta)); }
   }
 
@@ -224,7 +224,7 @@
     gap: 4px;
     z-index: 50;
     background: rgba(0,0,0,0.8);
-    border: 1px solid rgba(204,0,204,0.3);
+    border: 1px solid rgba(175,21,232,0.3);
     padding: 8px 12px;
     backdrop-filter: blur(10px);
   }
@@ -344,7 +344,7 @@
     grid-template-columns: 120px 1fr auto;
     align-items: center;
     padding: 20px 0;
-    border-bottom: 1px solid rgba(204,0,204,0.2);
+    border-bottom: 1px solid rgba(175,21,232,0.2);
     transition: all 0.3s ease;
     gap: 20px;
   }
@@ -439,7 +439,7 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(48px, 8vw, 100px);
     color: var(--magenta);
-    text-shadow: 0 0 30px rgba(204,0,204,0.5);
+    text-shadow: 0 0 30px rgba(175,21,232,0.5);
     letter-spacing: 4px;
     line-height: 1;
     animation: glitchFlicker 8s ease-in-out infinite;
@@ -541,9 +541,9 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 11px;
     letter-spacing: 3px;
-    color: rgba(204,0,204,0.4);
+    color: rgba(175,21,232,0.4);
     text-transform: uppercase;
-    border: 1px solid rgba(204,0,204,0.15);
+    border: 1px solid rgba(175,21,232,0.15);
     min-height: 100px;
   }
 
@@ -551,7 +551,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(204,0,204,0.3), transparent);
+    background: linear-gradient(to top, rgba(175,21,232,0.3), transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -627,7 +627,7 @@
     position: absolute;
     width: 320px;
     height: 320px;
-    border: 1px solid rgba(204,0,204,0.3);
+    border: 1px solid rgba(175,21,232,0.3);
     border-radius: 50%;
     animation: rotateSlow 20s linear infinite;
   }
@@ -824,7 +824,7 @@
     </div>
   </div>
 
-  <h2 style="font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: rgba(255,255,255,0.6); letter-spacing: 2px; margin-bottom: 20px; border-bottom: 1px solid rgba(204,0,204,0.3); padding-bottom: 8px;">Past Events</h2>
+  <h2 style="font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: rgba(255,255,255,0.6); letter-spacing: 2px; margin-bottom: 20px; border-bottom: 1px solid rgba(175,21,232,0.3); padding-bottom: 8px;">Past Events</h2>
   <div class="gig-list">
     <div class="gig-item" style="opacity: 0.7;">
       <div class="gig-date">16<span>JUL 2026</span></div>
@@ -1019,7 +1019,7 @@
     el.addEventListener('mouseleave', () => {
       if (!cursor) return;
       cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-      cursor.style.borderColor = '#FF00FF';
+      cursor.style.borderColor = '#af15e8';
     });
   });
 </script>
