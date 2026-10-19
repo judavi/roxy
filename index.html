@@ -266,8 +266,7 @@
   .social-dock {
     position: fixed;
     left: 30px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 30px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -282,7 +281,7 @@
     font-size: 9px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
+    color: #ffffff;
     text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
@@ -343,7 +342,7 @@
   }
 
   .panel-banner img {
-    width: 280px;
+    width: 350px;
     max-width: 80%;
     height: auto;
   }
@@ -671,6 +670,63 @@
       drop-shadow(0 0 30px var(--magenta));
   }
 
+  /* HOME SHOWCASE */
+  .home-showcase {
+    max-width: 680px;
+    width: 100%;
+    margin: 60px auto 0;
+    z-index: 10;
+  }
+
+  .home-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--magenta);
+    padding-bottom: 8px;
+  }
+
+  .home-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .home-photos img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border: 1px solid rgba(175,21,232,0.4);
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .home-photos img:hover {
+    transform: scale(1.05);
+    border-color: var(--glow-pink);
+  }
+
+  /* SOON PANEL */
+  .panel-about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .panel-about .about-visual {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .about-logo-img {
+    width: min(60vh, 480px);
+    height: auto;
+    opacity: 0.9;
+  }
+
   /* SCAN LINE EFFECT */
   .scanlines {
     position: fixed;
@@ -729,7 +785,7 @@
       transform: none;
       font-size: 8px;
       letter-spacing: 2px;
-      color: rgba(255,255,255,0.4);
+      color: #ffffff;
     }
     .social-link::before { display: none; }
 
@@ -759,7 +815,7 @@
 
     .about-visual { order: -1; }
     .about-logo-ring { width: 220px; height: 220px; }
-    .about-logo-img { width: 160px; }
+    .about-logo-img { width: 70vw; }
 
     .photo-grid { grid-template-columns: repeat(2, 1fr); }
     .photo-cell:nth-child(1) { grid-column: span 2; grid-row: span 1; }
@@ -812,6 +868,40 @@
   <div class="main-logo">
     <img src="/assets/bandLogo.webp" alt="WHO'S ROXY?" class="logo-img">
     <div class="logo-sub">Dublin · Post-Punk · Indie · Enter The World</div>
+  </div>
+
+  <div class="home-showcase">
+    <h2 class="home-heading">Upcoming Gigs</h2>
+    <div class="gig-list" style="margin-bottom: 40px;">
+      <div class="gig-item" onclick="showPanel('gigs')" style="cursor: pointer;">
+        <div class="gig-date">25<span>OCT 2026</span></div>
+        <div class="gig-info">
+          <h3>The Wild Duck</h3>
+          <p>Dublin, Ireland</p>
+        </div>
+      </div>
+      <div class="gig-item" onclick="showPanel('gigs')" style="cursor: pointer;">
+        <div class="gig-date">30<span>OCT 2026</span></div>
+        <div class="gig-info">
+          <h3>The Savoy</h3>
+          <p>Cork, Ireland</p>
+        </div>
+      </div>
+      <div class="gig-item" onclick="showPanel('gigs')" style="cursor: pointer;">
+        <div class="gig-date">31<span>OCT 2026</span></div>
+        <div class="gig-info">
+          <h3>The Four Provinces Inn</h3>
+          <p>Dublin, Ireland</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="home-heading">Photos</h2>
+    <div class="home-photos">
+      <img src="assets/photos/photo_01.webp" alt="Who's Roxy photo 1" loading="lazy" onclick="showPanel('photos')">
+      <img src="assets/photos/photo_03.webp" alt="Who's Roxy photo 3" loading="lazy" onclick="showPanel('photos')">
+      <img src="assets/photos/photo_04.webp" alt="Who's Roxy photo 4" loading="lazy" onclick="showPanel('photos')">
+    </div>
   </div>
 </div>
 
@@ -929,34 +1019,12 @@
   </div>
 </div>
 
-<!-- ABOUT PANEL -->
+<!-- SOON PANEL -->
 <div class="panel panel-about" id="panel-about">
-  <div class="panel-title">Who Is Roxy?</div>
-  <div class="about-layout">
-    <div class="about-text">
-      <p><strong>Who's Roxy?</strong> is a question we get asked a lot. The truth is, we're still figuring it out — and that's exactly the point. Born out of late-night rehearsals and too much coffee, we are a band built on raw energy, honest noise, and the kind of music that feels like it shouldn't exist yet.</p>
-      <p>Based in <strong>Dublin</strong>, we've been tearing up stages across Ireland since 2025. Our sound sits somewhere between post-punk urgency and experimental indie rock — always shifting, never settling.</p>
-      <p>We're just getting started. <strong>Get loud with us.</strong></p>
-      <div class="stat-block">
-        <div class="stat">
-          <div class="stat-num">2025</div>
-          <div class="stat-label">Dublin, Ireland</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">3</div>
-          <div class="stat-label">Singles released</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">1</div>
-          <div class="stat-label">EP incoming</div>
-        </div>
-      </div>
-    </div>
-    <div class="about-visual">
-      <div class="about-logo-wrap">
-        <div class="about-logo-ring"></div>
-        <img src="/assets/bandLogo.webp" alt="WHO'S ROXY?" class="about-logo-img">
-      </div>
+  <div class="about-visual">
+    <div class="about-logo-wrap">
+      <div class="about-logo-ring"></div>
+      <img src="assets/photos/hyacinth_logo.png" alt="Hyacinth" class="about-logo-img">
     </div>
   </div>
 </div>
@@ -966,7 +1034,7 @@
   <button class="portal-btn active" onclick="showPanel('main')">Home</button>
   <button class="portal-btn" onclick="showPanel('gigs')">Live</button>
   <button class="portal-btn" onclick="showPanel('photos')">Photos</button>
-  <button class="portal-btn" onclick="showPanel('about')">Who?</button>
+  <button class="portal-btn" onclick="showPanel('about')">Soon?</button>
 </nav>
 
 <script>
