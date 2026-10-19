@@ -71,11 +71,12 @@
   .scene {
     position: relative;
     width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow: visible;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-bottom: 60px;
   }
 
   /* ANIMATED BACKGROUND CITYSCAPE */
@@ -674,9 +675,11 @@
   .home-showcase {
     max-width: 680px;
     width: 100%;
-    margin: 60px auto 0;
+    margin: 80px auto 0;
+    text-align: center;
     z-index: 10;
   }
+  .home-showcase .home-photos { justify-content: center; }
 
   .home-side-logo {
     width: 420px;
