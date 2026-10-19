@@ -678,6 +678,24 @@
     z-index: 10;
   }
 
+  .home-side-logo {
+    position: absolute;
+    left: 3vw;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 300px;
+    max-width: 24vw;
+    z-index: 10;
+    animation: floatIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .home-side-logo img {
+    width: 100%;
+    height: auto;
+  }
+  @media (max-width: 760px) {
+    .home-side-logo { position: static; transform: none; width: 220px; margin: 0 auto 20px; }
+  }
+
   .home-heading {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 24px;
@@ -866,6 +884,10 @@
 
   <div class="main-logo">
     <div class="logo-sub">Dublin · Post-Punk · Indie · Enter The World</div>
+  </div>
+
+  <div class="home-side-logo">
+    <img src="assets/photos/whos_roxy_logo_left.png" alt="Who's Roxy?">
   </div>
 
   <div class="home-showcase">
