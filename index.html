@@ -336,6 +336,18 @@
     letter-spacing: 2px;
   }
 
+  .panel-banner {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 18px;
+  }
+
+  .panel-banner img {
+    width: 280px;
+    max-width: 80%;
+    height: auto;
+  }
+
   /* GIG LIST */
   .gig-list { display: flex; flex-direction: column; gap: 1px; }
 
@@ -805,6 +817,7 @@
 
 <!-- GIGS PANEL -->
 <div class="panel panel-gigs" id="panel-gigs">
+  <div class="panel-banner"><img src="assets/photos/whos_roxy_wordmark.png" alt="Who's Roxy"></div>
   <div class="panel-title">Live</div>
   
   <h2 style="font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--white); letter-spacing: 2px; margin-bottom: 20px; border-bottom: 1px solid var(--magenta); padding-bottom: 8px;">Upcoming</h2>
@@ -903,6 +916,7 @@
 
 <!-- PHOTOS PANEL -->
 <div class="panel panel-photos" id="panel-photos">
+  <div class="panel-banner"><img src="assets/photos/whos_roxy_wordmark.png" alt="Who's Roxy"></div>
   <div class="panel-title">The Band</div>
   <div class="photo-grid">
     <div class="photo-cell"><img src="assets/photos/photo_01.webp" alt="Who's Roxy photo 1" loading="lazy"></div>
